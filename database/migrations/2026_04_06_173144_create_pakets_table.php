@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('durasi')->default(1);
             $table->text('deskripsi');
             $table->integer('pax')->default(1);
+            $table->integer('minimal_pax')->default(1);
             $table->text('note')->nullable();
         });
     }

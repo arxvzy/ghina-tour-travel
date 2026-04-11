@@ -12,6 +12,7 @@ class Paket extends Model
         'durasi',
         'deskripsi',
         'pax',
+        'minimal_pax',
         'note',
     ];
 

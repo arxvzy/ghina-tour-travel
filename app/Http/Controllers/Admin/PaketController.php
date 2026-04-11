@@ -31,7 +31,8 @@ class PaketController extends Controller
             'harga_paket'     => 'required|numeric',
             'durasi'          => 'required|integer',
             'deskripsi'       => 'nullable|string',
-            'pax'             => 'required|integer',
+            'pax'             => 'nullable|integer',
+            'minimal_pax'     => 'required|integer',
             'note'            => 'nullable|string',
 
             // Nested Tempat + Fotos (files)
@@ -55,7 +56,7 @@ class PaketController extends Controller
 
         try {
             $paket = Paket::create($request->only([
-                'nama_paket', 'harga_paket', 'durasi', 'deskripsi', 'pax', 'note'
+                'nama_paket', 'harga_paket', 'durasi', 'deskripsi', 'pax', 'minimal_pax', 'note'
             ]));
 
             // === Handle Tempat + Foto Uploads ===
@@ -140,11 +141,12 @@ class PaketController extends Controller
             'durasi' => 'sometimes|integer',
             'deskripsi' => 'nullable|string',
             'pax' => 'sometimes|integer',
+            'minimal_pax' => 'required|integer',
             'note' => 'nullable|string',
         ]);
 
         $paket->update($request->only([
-            'nama_paket', 'harga_paket', 'durasi', 'deskripsi', 'pax', 'note'
+            'nama_paket', 'harga_paket', 'durasi', 'deskripsi', 'pax', 'minimal_pax', 'note'
         ]));
 
         return redirect()->route('admin.paket.index')
