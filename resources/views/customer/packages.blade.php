@@ -1,4 +1,4 @@
-@extends('customer.layouts.app')
+@extends('components.layout.customer')
 
 @section('title', 'Semua Paket — Ghina Tour Travel')
 

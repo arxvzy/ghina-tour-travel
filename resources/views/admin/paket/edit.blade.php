@@ -106,7 +106,7 @@
     }
 </script>
 
-@extends('admin.layouts.app')
+@extends('components.layout.admin')
 
 @section('title', 'Edit Paket Tour')
 @section('header', 'Edit Paket Tour')

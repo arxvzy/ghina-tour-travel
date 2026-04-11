@@ -1,0 +1,12 @@
+*, body { font-family: 'Poppins', sans-serif; }
+:root { --gold:#D4A017; --gold-dark:#b8860b; --gold-light:#f0c94d; }
+[data-theme="light"] { --bg:#F8F5EE; --bg-card:#FFFFFF; --bg-nav:#FFFFFF; --text:#1a1a1a; --text-muted:#6b6b6b; --border:#E0D8C8; }
+[data-theme="dark"] { --bg:#0d0d0d; --bg-card:#141414; --bg-nav:#141414; --text:#ffffff; --text-muted:#A8A8AB; --border:#353535; }
+body { background:var(--bg); color:var(--text); }
+.sidebar { width:260px;height:100vh;position:fixed;left:0;top:0;background:var(--bg-card);border-right:1px solid var(--border); }
+.main-content { margin-left:260px;min-height:100vh; }
+.nav-link { padding:12px 20px;display:block;color:var(--text);transition:.2s;border-left:3px solid transparent; }
+.nav-link:hover,.nav-link.active { background:rgba(212,160,23,.1);border-left-color:var(--gold);color:var(--gold); }
+.btn { display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer; }
+.btn-gold { background:var(--gold);color:#000; }
+.btn-gold:hover { background:var(--gold-dark); }

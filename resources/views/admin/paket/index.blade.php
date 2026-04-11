@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('components.layout.admin')
 
 @section('title', 'Kelola Paket Tour')
 @section('header', 'Kelola Paket Tour')
