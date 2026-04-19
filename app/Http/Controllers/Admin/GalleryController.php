@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
+use App\Models\Paket;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
@@ -22,7 +23,8 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        return view('admin.gallery.create');
+        $pakets = Paket::with(['tempat', 'fasilitas'])->latest()->get();
+        return view('admin.gallery.create', compact('pakets'));
     }
 
     public function show(Gallery $id)
@@ -30,21 +32,6 @@ class GalleryController extends Controller
         return view('admin.gallery.show', compact('id'));
     }
 
-    public function edit(Gallery $id)
-    {
-        return view('admin.gallery.edit', compact('id'));
-    }
-
-    public function update(Request $request, Gallery $id)
-    {
-        $request->validate([
-            'keterangan' => 'nullable|string|max:255'
-        ]);
-
-        $id->update(['keterangan' => $request->keterangan]);
-
-        return redirect()->route('admin.gallery.index')->with('success', 'Gallery berhasil diperbarui');
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -55,12 +42,13 @@ class GalleryController extends Controller
         $request->validate([
             'images' => 'required',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'keterangan' => 'nullable|string|max:255'
+            'id_fasilitas' => 'nullable|exists:fasilitas,id',
+            'id_tempat' => 'nullable|exists:tempats,id',
         ]);
 
         foreach ($request->file('images') as $image) {
             $path = $image->store('galleries', 'public');
-            Gallery::create(['path' => $path, 'keterangan' => $request->keterangan]);
+            Gallery::create(['path' => $path, 'id_fasilitas' => $request->id_fasilitas, 'id_tempat' => $request->id_tempat]);
         }
 
         return redirect()->route('admin.gallery.index')->with('success', 'Gallery berhasil ditambahkan');

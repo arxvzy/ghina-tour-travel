@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('galleries', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_fasilitas')->nullable();
+            $table->unsignedBigInteger('id_tempat')->nullable();
+            $table->foreign('id_fasilitas')->references('id')->on('fasilitas')->onDelete('cascade');
+            $table->foreign('id_tempat')->references('id')->on('tempats')->onDelete('cascade');
             $table->string('path');
-            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

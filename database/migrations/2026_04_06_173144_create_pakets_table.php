@@ -17,8 +17,7 @@ return new class extends Migration
             $table->string('nama_paket');
             $table->decimal('harga_paket', 15, 2);
             $table->integer('durasi')->default(1);
-            $table->text('deskripsi');
-            $table->integer('minimal_pax')->default(1);
+            $table->text('rundown');
             $table->text('note')->nullable();
         });
     }

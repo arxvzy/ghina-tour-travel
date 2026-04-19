@@ -10,8 +10,7 @@ class Paket extends Model
         'nama_paket',
         'harga_paket',
         'durasi',
-        'deskripsi',
-        'minimal_pax',
+        'rundown',
         'note',
     ];
 
@@ -21,18 +20,10 @@ class Paket extends Model
         return $this->hasMany(Tempat::class, 'id_paket');
     }
 
-    public function konsumsis()
+    public function fasilitas()
     {
-        return $this->hasMany(Konsumsi::class, 'id_paket');
+        return $this->hasMany(Fasilitas::class, 'id_paket');
     }
 
-    public function akomodasis()
-    {
-        return $this->hasMany(Akomodasi::class, 'id_paket');
-    }
 
-    public function transportasis()
-    {
-        return $this->hasMany(Transportasi::class, 'id_paket');
-    }
 }

@@ -1,7 +1,6 @@
 @extends('components.layout.customer')
 
 @section('title', $paket->nama_paket . ' — Ghina Tour Travel')
-@section('description', $paket->deskripsi)
 
 @section('extra_styles')
     <style>
@@ -128,7 +127,7 @@
         <div class="mb-10">
             <h2 class="text-[22px] font-bold t mb-4">Deskripsi Paket</h2>
             <div class="p-6 rounded-2xl" style="background:var(--bg-card);border:1px solid var(--border);">
-                <p class="tm leading-7">{{ $paket->deskripsi ?? 'Paket wisata pilihan dengan fasilitas lengkap.' }}</p>
+
                 @if ($paket->note)
                     <p class="tm leading-7 mt-4">{{ $paket->note }}</p>
                 @endif

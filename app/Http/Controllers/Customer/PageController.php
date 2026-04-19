@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Foto;
+use App\Models\Gallery;
 use App\Models\Paket;
 use Illuminate\Http\Request;
 
@@ -14,12 +15,12 @@ class PageController extends Controller
      */
     public function index()
     {
-        $pakets = Paket::with(['fotos', 'transportasis', 'akomodasis', 'konsumsis', 'tempats'])
+        $pakets = Paket::with(['fasilitas', 'tempats'])
             ->orderBy('created_at', 'desc')
             ->take(6)
             ->get();
 
-        $fotos = Foto::orderBy('created_at', 'desc')
+        $fotos = Gallery::orderBy('created_at', 'desc')
             ->take(8)
             ->get();
 
@@ -31,7 +32,7 @@ class PageController extends Controller
      */
     public function packages()
     {
-        $pakets = Paket::with(['fotos', 'transportasis', 'akomodasis', 'konsumsis', 'tempats'])
+        $pakets = Paket::with(['fasilitas', 'tempats'])
             ->orderBy('created_at', 'desc')
             ->paginate(9);
 
@@ -43,13 +44,9 @@ class PageController extends Controller
      */
     public function packageDetail($id)
     {
-        $paket = Paket::with(['fotos', 'transportasis', 'akomodasis', 'konsumsis', 'tempats'])
+        $paket = Paket::with(['fasilitas', 'tempats'])
             ->findOrFail($id);
 
-        $relatedPakets = Paket::with(['fotos'])
-            ->where('id', '!=', $id)
-            ->take(3)
-            ->get();
 
         return view('customer.package-detail', compact('paket', 'relatedPakets'));
     }
@@ -59,8 +56,7 @@ class PageController extends Controller
      */
     public function photos()
     {
-        $fotos = Foto::with('paket')
-            ->orderBy('created_at', 'desc')
+        $fotos = Gallery::orderBy('created_at', 'desc')
             ->paginate(12);
 
         return view('customer.photos', compact('fotos'));
@@ -73,10 +69,9 @@ class PageController extends Controller
     {
         $query = $request->input('q');
 
-        $pakets = Paket::with(['fotos', 'transportasis', 'akomodasis', 'konsumsis', 'tempats'])
+        $pakets = Paket::with(['fasilitas', 'tempats'])
             ->where(function ($q) use ($query) {
-                $q->where('nama_paket', 'like', "%{$query}%")
-                    ->orWhere('deskripsi', 'like', "%{$query}%");
+                $q->where('nama_paket', 'like', "%{$query}%");
             })
             ->orderBy('created_at', 'desc')
             ->paginate(9);

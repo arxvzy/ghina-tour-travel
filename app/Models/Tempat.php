@@ -16,8 +16,8 @@ class Tempat extends Model
         return $this->belongsTo(Paket::class, 'id_paket');
     }
 
-    public function fotos()
+    public function galleries()
     {
-        return $this->hasMany(Foto::class, 'id_tempat');
+        return $this->hasMany(Gallery::class, 'id_tempat');
     }
 }

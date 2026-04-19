@@ -4,15 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Konsumsi extends Model
+class Fasilitas extends Model
 {
+    protected $table = 'fasilitas';
+
     protected $fillable = [
         'id_paket',
-        'fasilitas_konsumsi'
+        'tipe_fasilitas',
+        'nama_fasilitas'
     ];
 
     public function paket()
     {
         return $this->belongsTo(Paket::class, 'id_paket');
+    }
+
+    public function galleries()
+    {
+        return $this->hasMany(Gallery::class, 'id_fasilitas');
     }
 }
